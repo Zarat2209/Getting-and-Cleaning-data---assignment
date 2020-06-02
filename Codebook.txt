@@ -1,0 +1,43 @@
+CODEBOOK
+
+The run_analysis.R file contains the code required to process data as required by the "Getting and Cleaning Data" 
+peer reviewed course assignment.
+
+the following actions were undertaken to process the data.
+
+1. Download the "Human Activity Recognition Using Smartphones Data" data files from the following website;
+
+http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
+
+This data set contains measurements taken by Samsung smart phones of individual test subjects undettaking 
+a number of physical activities. The measurements taken from the inertial sensors
+within the smart phone recorded motion of the test subject as they undertook each task.
+
+The dataset consisted of two components, identified as the "train" and "test" sets.
+
+
+2. Apply column names to the individual data sets based on the "features.txt" file obtained from the UCI website.
+
+
+3. Apply descriptive labels to each of the activities undertaken by the test subjects. The original data sets
+identified each activity with a numeric code, and provided a txt file links the class labels with their activity name.
+A user defined function, " act_label" was written to loop over the raw data and replace the ativity code with a descriptice activity name.
+
+4. A column name was appended to the dataset containing the details of the subjct undertaking ach activity.
+
+5. The relevant compnents of the individual data components were bound together using the cbind function to creat a single data frame for each of the "test" and "train" sets.
+
+6. The process above was repeated for each of the two "train" and "test" data sets.
+
+7. The "train" and "test dataframes" were then merged using the rowbind function to create a data frame identified as "Merged_data"
+
+8. Next the measurements relating to mean and standard deviation measurements were extracted from "Merged_data" to create a new data frame, 
+"Tidydata." To create "Tidydata," first vectors of the columns that contained the subject and activity data from "Merged_data" were created. 
+The Gropl function was then used to subset only those columns of "Merged_data" that contained mean and standard deviation measurements. 
+The subject, activity, mean and standard deviation columns were then rebound using cbind to create a new version of "Tidy_data" that only contained
+the relevant data columns.
+
+9. gsub was then used to substitute descriptive variable names for the existing abbreviated names.
+
+10. Finally the iformation in Tidydata was summarised with the average of each variable for each activity and each subject. This was achieved by grouping the 
+data in Tidydata by subject and activity and then applying the summarise_all function in R to created a new data frame, "Final_data."
